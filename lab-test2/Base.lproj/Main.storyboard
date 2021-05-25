@@ -189,6 +189,9 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Back" id="Xeb-3W-MCE"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="table" destination="z9l-s6-TFK" id="Lat-DQ-Y1c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLw-Wv-iVK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
