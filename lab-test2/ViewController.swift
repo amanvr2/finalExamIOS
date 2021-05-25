@@ -26,22 +26,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var providerTxt: UITextField!
     
     @IBOutlet weak var firstProd: UILabel!
-    //    var product:[ProductModel]?
+    var pro = [ProductModel]()
     
-    var pro: [Product]?
+    //var pro: [Product]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         managedContext = appDelegate.persistentContainer.viewContext
 
-    NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
+//    NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
 
     
 
     loadCoreData()
-    firstProduct()
-
+   
 }
     
     
@@ -54,9 +53,19 @@ class ViewController: UIViewController {
         let desc = descTxt.text ?? ""
         let provid = providerTxt.text ?? ""
 
-        let data = Product(id: id, name: name, price: price, description: desc, provider: provid)
-
-        pro?.append(data)
+//        let data = Product(id: id, name: name, price: price, description: desc, provider: provid)
+//
+//        pro?.append(data)
+        
+        let newFolder = ProductModel(context: self.managedContext)
+        newFolder.name = name
+        newFolder.id = Int16(id)
+        newFolder.price = Int16(price)
+        newFolder.desc = desc
+        newFolder.provider = provid
+        
+        self.pro.append(newFolder)
+        
         clearfields()
         
     }
@@ -67,62 +76,70 @@ class ViewController: UIViewController {
             prodListTableVC.pro = self.pro
         }
     }
-//
+
 //        //MARK: - CoreData functions
-//
+
         func loadCoreData() {
 
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+//            pro = [ProductModel]()
 //
-//            let managedContext = appDelegate.persistentContainer.viewContext
-
-            pro = [Product]()
-
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductModel")
-
+//            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductModel")
+//
+//            do {
+//
+//                let results = try managedContext.fetch(fetchRequest)
+//                if results is [NSManagedObject] {
+//                    for result in (results as! [NSManagedObject]) {
+//                        let id = result.value(forKey: "id") as! Int
+//                        let name = result.value(forKey: "name") as! String
+//                        let price = result.value(forKey: "price") as! Int
+//                        let description = result.value(forKey: "desc") as! String
+//                        let provider = result.value(forKey: "provider") as! String
+//
+//                        pro?.append(Product(id: id, name: name, price: price, description: description, provider: provider))
+//
+//                        firstProd.text = pro?.first?.name
+//                    }
+//                }
+//
+//            } catch {
+//                print(error)
+//            }
+            
+            let request: NSFetchRequest<ProductModel> = ProductModel.fetchRequest()
+            
             do {
+                pro = try managedContext.fetch(request)
                 
-                let results = try managedContext.fetch(fetchRequest)
-                if results is [NSManagedObject] {
-                    for result in (results as! [NSManagedObject]) {
-                        let id = result.value(forKey: "id") as! Int
-                        let name = result.value(forKey: "name") as! String
-                        let price = result.value(forKey: "price") as! Int
-                        let description = result.value(forKey: "desc") as! String
-                        let provider = result.value(forKey: "provider") as! String
-
-                        pro?.append(Product(id: id, name: name, price: price, description: description, provider: provider))
-                    }
-                }
-
-            } catch {
-                print(error)
+                firstProd.text = pro.first?.name
             }
+            catch {
+                print("Error loading folders \(error.localizedDescription)")
+            }
+           
         }
 
-        @objc func saveCoreData() {
-            clearCoreData()
+//        @objc func saveCoreData() {
+//            clearCoreData()
+////
 //
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            for book in pro! {
+//                let bookEntity = NSEntityDescription.insertNewObject(forEntityName: "ProductModel", into: managedContext)
 //
-//            let managedContext = appDelegate.persistentContainer.viewContext
-
-            for book in pro! {
-                let bookEntity = NSEntityDescription.insertNewObject(forEntityName: "ProductModel", into: managedContext)
-
-                bookEntity.setValue(book.id, forKey: "id")
-                bookEntity.setValue(book.name, forKey: "name")
-                bookEntity.setValue(book.price, forKey: "price")
-                bookEntity.setValue(book.description, forKey: "desc")
-                bookEntity.setValue(book.provider, forKey: "provider")
-            }
-
-            do {
-                try managedContext.save()
-            } catch {
-                print(error)
-            }
-        }
+//                bookEntity.setValue(book.id, forKey: "id")
+//                bookEntity.setValue(book.name, forKey: "name")
+//                bookEntity.setValue(book.price, forKey: "price")
+//                bookEntity.setValue(book.description, forKey: "desc")
+//                bookEntity.setValue(book.provider, forKey: "provider")
+//            }
+//
+//            do {
+//                try managedContext.save()
+//            } catch {
+//                print(error)
+//            }
+//        }
 
 
     
@@ -150,36 +167,6 @@ class ViewController: UIViewController {
         priceTxt.text = ""
         descTxt.text = ""
         providerTxt.text = ""
-    }
-    
-    func firstProduct(){
-        
-        
-        pro = [Product]()
-
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductModel")
-
-        do {
-            
-            let results = try managedContext.fetch(fetchRequest)
-            
-            if results is [NSManagedObject] {
-                for result in (results as! [NSManagedObject]) {
-                    let id = result.value(forKey: "id") as! Int
-                    let name = result.value(forKey: "name") as! String
-                    let price = result.value(forKey: "price") as! Int
-                    let description = result.value(forKey: "desc") as! String
-                    let provider = result.value(forKey: "provider") as! String
-
-                    pro?.append(Product(id: id, name: name, price: price, description: description, provider: provider))
-                    
-                    firstProd.text = name
-                }
-            }
-
-        } catch {
-            print(error)
-        }
     }
 
 

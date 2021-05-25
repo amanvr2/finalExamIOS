@@ -10,8 +10,8 @@ import CoreData
 
 class ProductListTVC: UITableViewController {
     
-    var pro: [Product]?
-    var prod = [Product]()
+   // var pro: [Product]?
+    var pro = [ProductModel]()
    
     
     // create the context
@@ -39,15 +39,15 @@ class ProductListTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return pro?.count ?? 0
+        return pro.count 
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let product = pro![indexPath.row]
+        let product = pro[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "showList")
-        cell?.textLabel?.text = product.name + " - " + product.description
+        cell?.textLabel?.text = product.name! + " - " + product.desc!
         cell?.detailTextLabel?.text = "\(product.price) - \(product.id)"
         
 
