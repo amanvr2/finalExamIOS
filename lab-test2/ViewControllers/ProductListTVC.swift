@@ -10,8 +10,11 @@ import CoreData
 
 class ProductListTVC: UITableViewController {
     
-   // var pro: [Product]?
+   
     var pro = [ProductModel]()
+    var prov = [Providers]()
+    
+    var deletingMovingOption: Bool = false
    
     @IBOutlet var table: UITableView!
     
@@ -24,11 +27,7 @@ class ProductListTVC: UITableViewController {
         super.viewDidLoad()
 
        showSearchBar()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+      
     }
 
     // MARK: - Table view data source
@@ -47,43 +46,52 @@ class ProductListTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let product = pro[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "showList")
-        cell?.textLabel?.text = product.name! + " - " + product.desc!
-        cell?.detailTextLabel?.text = "\(product.price) - \(product.id)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "showList",for: indexPath)
+        
+
+        cell.textLabel?.text = product.name!  + " - " + product.desc!
+        cell.detailTextLabel?.text = "\(product.price) - \(product.id)"
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = .darkGray
-        cell!.selectedBackgroundView = backgroundView
+        cell.selectedBackgroundView = backgroundView
         
 
-        return cell!
+        return cell
     }
     
 
-    // Override to support editing the table view.
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            deleteNote(note: notes[indexPath.row])
-//            saveNotes()
-//            notes.remove(at: indexPath.row)
-//            // Delete the row from the data source
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-//    }
-
-    /*
-    // Override to support editing the table view.
+  //   Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            deleteNote(pr: pro[indexPath.row])
+            saveNotes()
+            
+            pro.remove(at: indexPath.row)
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
+           
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+        }
     }
-    */
+    
+    
+    @IBAction func showProviders(_ sender: UIButton) {
+        
+        print((sender as AnyObject).titleLabel?.text)
+        
+        if (sender.titleLabel?.text == "Show Products"){
+            loadCoreData(type: ProductModel())
+            
+            sender.setTitle("Show Providers", for: .normal)
+        }else if (sender.titleLabel?.text == "Show Providers"){
+            loadCoreData(type: Providers())
+            sender.setTitle("View Products", for: .normal)
+           
+        }
+    }
+    
 
     /*
     // Override to support rearranging the table view.
@@ -102,9 +110,9 @@ class ProductListTVC: UITableViewController {
 
     /// delete notes from context
     /// - Parameter note: note defined in Core Data
-//    func deleteNote(pr: pro) {
-//        context.delete(pr)
-//    }
+    func deleteNote(pr: ProductModel) {
+        context.delete(pr)
+    }
     
     func saveNotes() {
         do {
@@ -114,7 +122,51 @@ class ProductListTVC: UITableViewController {
         }
     }
     
+    func loadCoreData(type: NSManagedObject) {
+        
+        pro.removeAll()
+        
+        if(type is ProductModel){
+
+        let request: NSFetchRequest<ProductModel> = ProductModel.fetchRequest()
+        
+        do {
+            pro = try context.fetch(request)
+            
+            
+        }
+        catch {
+            print("Error loading products \(error.localizedDescription)")
+        }
+            
+        }
+        
+        else if(type is Providers){
+            
+            let request: NSFetchRequest<Providers> = Providers.fetchRequest()
+            
+            do {
+                prov = try context.fetch(request)
+                
+                
+            }
+            catch {
+                print("Error loading providers \(error.localizedDescription)")
+            }
+            
+        }
+        
+        tableView.reloadData()
+        
+       
+    }
+    
     // MARK: - Navigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+      
+        return deletingMovingOption ? false : true
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -122,10 +174,11 @@ class ProductListTVC: UITableViewController {
         // Pass the selected object to the new view controller.
         
         let destination = segue.destination as! ShowViewController
+        destination.delegate = self
         
         if let indexPath = tableView.indexPathForSelectedRow {
             
-            if (pro[indexPath.row] is  ProductModel){
+            if (pro[indexPath.row] is ProductModel){
                 
                 destination.selectedProduct =  pro[indexPath.row] as? ProductModel
             }
@@ -162,8 +215,17 @@ class ProductListTVC: UITableViewController {
         
         tableView.reloadData()
     }
+    
+    
 
-
+    @IBAction func editBtn(_ sender: Any) {
+        
+        deletingMovingOption = !deletingMovingOption
+    
+        
+        tableView.setEditing(deletingMovingOption, animated: true)
+    }
+    
 
 }
 

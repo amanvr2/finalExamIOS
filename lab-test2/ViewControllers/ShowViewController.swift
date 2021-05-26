@@ -9,10 +9,14 @@ import UIKit
 import CoreData
 
 class ShowViewController: UIViewController {
+    // create the context
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var products: [ProductModel]?
     var managedContext: NSManagedObjectContext!
     var selectedProduct: ProductModel?
+    
+    weak var delegate: ProductListTVC?
     
     @IBOutlet weak var idt: UITextField!
     
@@ -40,10 +44,61 @@ class ShowViewController: UIViewController {
     }
     
     
+    func loadCoreData() {
+
+        //let request: NSFetchRequest<ProductModel> = ProductModel.fetchRequest()
+        
+        do {
+            products = try context.fetch(ProductModel.fetchRequest())
+            DispatchQueue.main.async {
+                self.delegate?.tableView.reloadData()
+            }
+            
+            
+        }
+        catch {
+            print("Error loading folders \(error.localizedDescription)")
+        }
+       
+    }
+
+    
     @IBAction func cancel(_ sender: Any) {
         
         self.dismiss(animated: false, completion: nil)
     }
+    
+    @IBAction func update(_ sender: Any) {
+        
+        let updatedId = Int16(idt.text!)!
+        let updatedName = name.text
+        let updatedPrice = Int16(price.text!)!
+        let updatedDesp = descp.text
+        let updatedProvid = provid.text
+        
+        selectedProduct?.id = updatedId
+        selectedProduct?.name = updatedName
+        selectedProduct?.price = updatedPrice
+        selectedProduct?.desc = updatedDesp
+        selectedProduct?.provider = updatedProvid
+        
+     
+        
+        print("done")
+        
+        products = []
+        let newNote = ProductModel(context: context)
+        newNote.name = updatedName
+        do {
+            try context.save()
+        } catch {
+            print("Error saving the product \(error.localizedDescription)")
+        }
+        
+        //loadCoreData()
+        
+    }
+    
     
 
     /*

@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var firstProd: UILabel!
     var pro = [ProductModel]()
+    var prov = [Providers]()
     
     //var pro: [Product]?
     
@@ -44,6 +45,7 @@ class ViewController: UIViewController {
     
     @IBAction func save(_ sender: Any) {
         
+        clearCoreData()
         
         let id = Int(idTxt.text ?? "0") ?? 0
         let name = nameTxt.text ?? ""
@@ -53,14 +55,25 @@ class ViewController: UIViewController {
 
 
         
-        let newFolder = ProductModel(context: self.managedContext)
-        newFolder.name = name
-        newFolder.id = Int16(id)
-        newFolder.price = Int16(price)
-        newFolder.desc = desc
-        newFolder.provider = provid
+        let newProduct = ProductModel(context: self.managedContext)
+        newProduct.name = name
+        newProduct.id = Int16(id)
+        newProduct.price = Int16(price)
+        newProduct.desc = desc
+        newProduct.provider = provid
         
-        self.pro.append(newFolder)
+        var pnewProduct = Providers(context: managedContext)
+       
+        pnewProduct.name="testProv"
+        
+        self.pro.append(newProduct)
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print(error)
+        }
+        
         
         clearfields()
         
@@ -100,6 +113,20 @@ class ViewController: UIViewController {
         do {
             let results = try managedContext.fetch(fetchRequest)
             for result in results {
+                if let managedObject = result as? NSManagedObject {
+                    managedContext.delete(managedObject)
+                }
+            }
+        } catch {
+            print("Error deleting records \(error)")
+        }
+        
+        
+        let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>(entityName: "Providers")
+//        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let resultss = try managedContext.fetch(fetchRequest2)
+            for result in resultss {
                 if let managedObject = result as? NSManagedObject {
                     managedContext.delete(managedObject)
                 }

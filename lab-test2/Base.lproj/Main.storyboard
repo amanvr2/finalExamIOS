@@ -147,7 +147,7 @@
             </objects>
             <point key="canvasLocation" x="-197.10144927536234" y="57.589285714285708"/>
         </scene>
-        <!--Products-->
+        <!--Product ListTVC-->
         <scene sceneID="7HO-bZ-Wcr">
             <objects>
                 <tableViewController modalPresentationStyle="fullScreen" id="GQP-Ec-ycd" customClass="ProductListTVC" customModule="lab_test2" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,8 +194,21 @@
                         <barButtonItem title="Item" id="WkF-B5-7Uz"/>
                         <barButtonItem title="Item" id="c22-pE-bFc"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Products" id="Hdz-IJ-8h9">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="R9u-dp-2ey"/>
+                    <navigationItem key="navigationItem" id="Hdz-IJ-8h9">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="qWw-kx-Acv">
+                            <rect key="frame" x="154" y="7" width="106" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Show providers"/>
+                            <connections>
+                                <action selector="showProviders:" destination="GQP-Ec-ycd" eventType="touchUpInside" id="Fcw-A5-5Jp"/>
+                            </connections>
+                        </button>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="R9u-dp-2ey">
+                            <connections>
+                                <action selector="editBtn:" destination="GQP-Ec-ycd" id="Ur9-LR-qwP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -251,6 +264,15 @@
                                 <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancel:" destination="gSp-O2-7Nx" eventType="touchUpInside" id="wM2-NI-79c"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEY-Qi-sRJ">
+                                <rect key="frame" x="188" y="535" width="41" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="update:" destination="gSp-O2-7Nx" eventType="touchUpInside" id="81d-Xd-DcP"/>
                                 </connections>
                             </button>
                         </subviews>
