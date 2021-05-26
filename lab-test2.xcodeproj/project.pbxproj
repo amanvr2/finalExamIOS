@@ -18,6 +18,7 @@
 		FA005BF3265A930F000BCD4E /* lab_test2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA005BF2265A930F000BCD4E /* lab_test2UITests.swift */; };
 		FA005C13265AC6C3000BCD4E /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA005C12265AC6C3000BCD4E /* Product.swift */; };
 		FA005C18265AE33B000BCD4E /* ProductListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA005C17265AE33B000BCD4E /* ProductListTVC.swift */; };
+		FAAC9BF0265DC26E002DB5EC /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAC9BEF265DC26E002DB5EC /* ShowViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		FA005BF4265A930F000BCD4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA005C12265AC6C3000BCD4E /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FA005C17265AE33B000BCD4E /* ProductListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTVC.swift; sourceTree = "<group>"; };
+		FAAC9BEF265DC26E002DB5EC /* ShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,16 +107,15 @@
 		FA005BCC265A92F1000BCD4E /* lab-test2 */ = {
 			isa = PBXGroup;
 			children = (
+				FAAC9BEB265DC1C4002DB5EC /* ViewControllers */,
 				FA005BCD265A92F1000BCD4E /* AppDelegate.swift */,
 				FA005BCF265A92F1000BCD4E /* SceneDelegate.swift */,
-				FA005BD1265A92F1000BCD4E /* ViewController.swift */,
 				FA005BD3265A92F1000BCD4E /* Main.storyboard */,
 				FA005BD9265A930F000BCD4E /* Assets.xcassets */,
 				FA005BDB265A930F000BCD4E /* LaunchScreen.storyboard */,
 				FA005BDE265A930F000BCD4E /* Info.plist */,
 				FA005BD6265A92F1000BCD4E /* lab_test2.xcdatamodeld */,
 				FA005C12265AC6C3000BCD4E /* Product.swift */,
-				FA005C17265AE33B000BCD4E /* ProductListTVC.swift */,
 			);
 			path = "lab-test2";
 			sourceTree = "<group>";
@@ -135,6 +136,16 @@
 				FA005BF4265A930F000BCD4E /* Info.plist */,
 			);
 			path = "lab-test2UITests";
+			sourceTree = "<group>";
+		};
+		FAAC9BEB265DC1C4002DB5EC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA005C17265AE33B000BCD4E /* ProductListTVC.swift */,
+				FA005BD1265A92F1000BCD4E /* ViewController.swift */,
+				FAAC9BEF265DC26E002DB5EC /* ShowViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA005BD2265A92F1000BCD4E /* ViewController.swift in Sources */,
+				FAAC9BF0265DC26E002DB5EC /* ShowViewController.swift in Sources */,
 				FA005BCE265A92F1000BCD4E /* AppDelegate.swift in Sources */,
 				FA005C13265AC6C3000BCD4E /* Product.swift in Sources */,
 				FA005C18265AE33B000BCD4E /* ProductListTVC.swift in Sources */,

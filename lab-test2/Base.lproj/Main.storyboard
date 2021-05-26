@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4r-5M-aLr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1877" y="67"/>
+            <point key="canvasLocation" x="-1429" y="58"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -147,7 +147,7 @@
             </objects>
             <point key="canvasLocation" x="-197.10144927536234" y="57.589285714285708"/>
         </scene>
-        <!--Back-->
+        <!--Products-->
         <scene sceneID="7HO-bZ-Wcr">
             <objects>
                 <tableViewController modalPresentationStyle="fullScreen" id="GQP-Ec-ycd" customClass="ProductListTVC" customModule="lab_test2" customModuleProvider="target" sceneMemberID="viewController">
@@ -179,6 +179,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="gSp-O2-7Nx" kind="showDetail" id="i8q-tN-fJu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -186,8 +189,14 @@
                             <outlet property="delegate" destination="GQP-Ec-ycd" id="hag-7Q-5SU"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Back" id="Xeb-3W-MCE"/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="zKP-8P-75q"/>
+                        <barButtonItem title="Item" id="WkF-B5-7Uz"/>
+                        <barButtonItem title="Item" id="c22-pE-bFc"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Products" id="Hdz-IJ-8h9">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis" catalog="system" id="R9u-dp-2ey"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="table" destination="z9l-s6-TFK" id="Lat-DQ-Y1c"/>
@@ -195,10 +204,74 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLw-Wv-iVK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="576" y="81"/>
+            <point key="canvasLocation" x="575.36231884057975" y="80.357142857142847"/>
+        </scene>
+        <!--Show View Controller-->
+        <scene sceneID="Eop-eh-6WC">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="gSp-O2-7Nx" customClass="ShowViewController" customModule="lab_test2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nxx-0r-3OV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-k1-3lt">
+                                <rect key="frame" x="92" y="132" width="249" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nuW-V5-L1M">
+                                <rect key="frame" x="92" y="214" width="249" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mU6-Mp-fzg">
+                                <rect key="frame" x="92" y="293" width="249" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wPL-lI-Jxd">
+                                <rect key="frame" x="92" y="368" width="249" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-YT-LE1">
+                                <rect key="frame" x="92" y="435" width="249" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctg-me-KCX">
+                                <rect key="frame" x="314" y="52" width="56" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancel:" destination="gSp-O2-7Nx" eventType="touchUpInside" id="wM2-NI-79c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DK4-ru-Ni9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="descp" destination="wPL-lI-Jxd" id="C2f-fU-XcJ"/>
+                        <outlet property="idt" destination="Zxl-k1-3lt" id="mhq-q0-cTB"/>
+                        <outlet property="name" destination="nuW-V5-L1M" id="Mq8-Ee-9mm"/>
+                        <outlet property="price" destination="mU6-Mp-fzg" id="odv-R1-09k"/>
+                        <outlet property="provid" destination="HhX-YT-LE1" id="gM1-C2-aJ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TCW-oH-vPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1301.449275362319" y="218.97321428571428"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

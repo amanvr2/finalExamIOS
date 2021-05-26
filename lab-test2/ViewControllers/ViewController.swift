@@ -35,9 +35,7 @@ class ViewController: UIViewController {
         
         managedContext = appDelegate.persistentContainer.viewContext
 
-//    NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
 
-    
 
     loadCoreData()
    
@@ -53,9 +51,7 @@ class ViewController: UIViewController {
         let desc = descTxt.text ?? ""
         let provid = providerTxt.text ?? ""
 
-//        let data = Product(id: id, name: name, price: price, description: desc, provider: provid)
-//
-//        pro?.append(data)
+
         
         let newFolder = ProductModel(context: self.managedContext)
         newFolder.name = name
@@ -81,32 +77,6 @@ class ViewController: UIViewController {
 
         func loadCoreData() {
 
-
-//            pro = [ProductModel]()
-//
-//            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductModel")
-//
-//            do {
-//
-//                let results = try managedContext.fetch(fetchRequest)
-//                if results is [NSManagedObject] {
-//                    for result in (results as! [NSManagedObject]) {
-//                        let id = result.value(forKey: "id") as! Int
-//                        let name = result.value(forKey: "name") as! String
-//                        let price = result.value(forKey: "price") as! Int
-//                        let description = result.value(forKey: "desc") as! String
-//                        let provider = result.value(forKey: "provider") as! String
-//
-//                        pro?.append(Product(id: id, name: name, price: price, description: description, provider: provider))
-//
-//                        firstProd.text = pro?.first?.name
-//                    }
-//                }
-//
-//            } catch {
-//                print(error)
-//            }
-            
             let request: NSFetchRequest<ProductModel> = ProductModel.fetchRequest()
             
             do {
@@ -120,26 +90,6 @@ class ViewController: UIViewController {
            
         }
 
-//        @objc func saveCoreData() {
-//            clearCoreData()
-////
-//
-//            for book in pro! {
-//                let bookEntity = NSEntityDescription.insertNewObject(forEntityName: "ProductModel", into: managedContext)
-//
-//                bookEntity.setValue(book.id, forKey: "id")
-//                bookEntity.setValue(book.name, forKey: "name")
-//                bookEntity.setValue(book.price, forKey: "price")
-//                bookEntity.setValue(book.description, forKey: "desc")
-//                bookEntity.setValue(book.provider, forKey: "provider")
-//            }
-//
-//            do {
-//                try managedContext.save()
-//            } catch {
-//                print(error)
-//            }
-//        }
 
 
     

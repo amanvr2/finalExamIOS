@@ -6,13 +6,43 @@
 //
 
 import UIKit
+import CoreData
 
 class ShowViewController: UIViewController {
-
+    
+    var products: [ProductModel]?
+    var managedContext: NSManagedObjectContext!
+    var selectedProduct: ProductModel?
+    
+    @IBOutlet weak var idt: UITextField!
+    
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var price: UITextField!
+    @IBOutlet weak var descp: UITextField!
+    
+    @IBOutlet weak var provid: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if(selectedProduct != nil){
+        //Set Selected Product Data in textFields
+        idt.text =  String (selectedProduct!.id)
+        name.text = selectedProduct?.name
+        price.text = String(selectedProduct!.price)
+        descp.text = selectedProduct?.desc
+        provid.text =  selectedProduct!.provider
+        
+        selectedProduct=nil
+        }
 
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func cancel(_ sender: Any) {
+        
+        self.dismiss(animated: false, completion: nil)
     }
     
 
